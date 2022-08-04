@@ -1,6 +1,31 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, CircleMarker } from "react-leaflet";
 import RoutineMachine from "./RoutineMachine";
+import React,{useEffect, useState} from 'react';
+
 function App() {
+
+  const [position, setposition] = useState([])
+  
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      console.log('Geolocation is not supported by your browser');
+    } else {
+      console.log('Locating...');
+      navigator.geolocation.getCurrentPosition((position) => {
+        // console.log(null);
+        // console.log(position.coords.latitude);
+        // console.log(position.coords.longitude);
+        setposition([position.coords.latitude,position.coords.longitude])
+      }, () => {
+        // console.log('Unable to retrieve your location');
+      });
+    }
+  }
+
+  useEffect(() => {
+    
+    getLocation();
+  }, [])
   
   return (
     <>
@@ -11,7 +36,8 @@ function App() {
 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 />
-      <RoutineMachine />
+<CircleMarker center={position}></CircleMarker>
+      <RoutineMachine/>
     </MapContainer>
       </div>
       <div className="w-full grid grid-rows-[160px,1fr] ">

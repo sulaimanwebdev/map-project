@@ -1,9 +1,19 @@
-
+import { MapContainer, TileLayer } from "react-leaflet";
+import RoutineMachine from "./RoutineMachine";
 function App() {
+  
   return (
     <>
     <div className="grid grid-rows-2 h-full min-h-screen max-h-screen w-full overflow-hidden">
-      <div className="w-full bg-red-400"></div>
+      <div className="w-full">
+      <MapContainer  zoom={10} scrollWheelZoom={true}>
+<TileLayer
+attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+/>
+      <RoutineMachine />
+    </MapContainer>
+      </div>
       <div className="w-full grid grid-rows-[160px,1fr] ">
         <div className="flex text-white justify-between gap-[2px] w-full bg-[#474FFE] pt-5 px-3 pb-3 rounded-b-3xl">
         <div className="h-full">
@@ -32,7 +42,7 @@ function App() {
            </div>
         </div>
 
-        <div className="w-full overflow-y-auto">
+        <div className="sidebar-scroll w-full overflow-y-auto">
         <div className="w-full pt-5">
              <div className="px-3 flex gap-3"><div className="text-[20px] font-[700] transform -translate-y-1">Transgroup Express LLC</div><div><span className="text-[15px] text-[#81878C] font-[500] mr-1">(Refrence</span><span className="text-[16px] font-[600]">#1234)</span></div></div>
              <div className="mt-5 w-full py-2.5 px-3 border-t border-b grid grid-cols-[115px,1fr]"><div className="text-[15px] text-[#60676D] font-[500]">Full/Partial</div><div className="text-[15px] text-[#474FFE] font-[600]">Full</div></div>
